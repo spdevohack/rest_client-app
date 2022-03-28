@@ -11,7 +11,7 @@ class PostIndex
 	end
 
 	def call
-		debugger
+		# debugger
 		res = RestClient.get(@url, @headers)
     body = JSON.parse(res)
 	end
