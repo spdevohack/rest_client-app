@@ -3,17 +3,26 @@ class V1::PostsController < ApplicationController
 	before_action :set_id, only: [:destroy, :update]
 
 	require 'rest-client'
+	require 'json'
+
   def index
   	@posts = Post.all
 		render json: @posts, status: 200
+		
+
+		# PostIndex.new.call
+
 		# response = RestClient.get "http://localhost:3000/v1/posts"
+		# res = RestClient::Request.execute(method: :get, url: 'http://localhost:3000/v1/posts', timeout: 10)
+		# posts = JSON.parse(respose)
+
   end
 
 
   def create
 		@post = Post.new(post_params)
 		if @post.save!
-			render :create
+			render :create, status: 201
 		else
 			head(:unprocessable_entity)
 		end

@@ -3,16 +3,24 @@ class V1::CommentsController < ApplicationController
   before_action :set_comment_id, only: [:destroy, :update]
   def index
     @comments = current_post.comments.all
+    # @comments = Comment.all
     render json: @comments, status: 200
   end
 
   def create
     @comment = current_post.comments.build(comment_params)
+
+    # @comment = Comment.build(comment_params)
     if @comment.save!
       render :create
     else
       head(:unprocessable_entity)
     end
+  end
+
+  def show 
+    @comment = Comment.find(params[:id])
+    render :show, status: 200
   end
 
   def destroy
