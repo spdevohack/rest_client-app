@@ -52,3 +52,6 @@ gem 'netrc'
 gem 'http-accept'
 gem 'http-cookie'
 gem 'jbuilder'
+
+
+gem 'carrierwave'

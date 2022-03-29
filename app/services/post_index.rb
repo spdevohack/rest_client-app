@@ -16,6 +16,4 @@ class PostIndex
     body = JSON.parse(res)
 	end
 
-
-
 end

@@ -23,68 +23,68 @@ require File.dirname(__FILE__) + '/restclient/windows'
 
 
 
-url = "http://localhost:3000/v1/posts"
+# url = "http://localhost:3000/v1/posts"
 
-respose = RestClient.get(url)
+# respose = RestClient.get(url)
 
-my_data = JSON.parse(respose) #the return data is array of record
+# my_data = JSON.parse(respose) #the return data is array of record
 
-my_data.each do |post|
-  puts post["title"]
-end
-
-
-# delete Post
-
-RestClient.delete(url)
-
-# creating post
-RestClient.post(url, {
-  post: {
-    title: title,
-    description: description,
-    file: file
-  }
-})
-
-# update post
-
-RestClient.post(url, {
-  post: {
-    title: title,
-    description: description,
-    file: file
-  }
-})
+# my_data.each do |post|
+#   puts post["title"]
+# end
 
 
-# createing Comment
-res  = RestClient.post 'http://localhost:3000/v1/posts/5/comments' , {
-   comment: {
-     content: "This comment make through irb console"
-  }}
+# # delete Post
+
+# RestClient.delete(url)
+
+# # creating post
+# RestClient.post(url, {
+#   post: {
+#     title: title,
+#     description: description,
+#     file: file
+#   }
+# })
+
+# # update post
+
+# RestClient.post(url, {
+#   post: {
+#     title: title,
+#     description: description,
+#     file: file
+#   }
+# })
 
 
-comments = JSON.parse(res)
+# # createing Comment
+# res  = RestClient.post 'http://localhost:3000/v1/posts/5/comments' , {
+#    comment: {
+#      content: "This comment make through irb console"
+#   }}
 
 
-# All comment fetch for post
-res = RestClient.get 'http://localhost:3000/v1/posts/5/comments'
-
-# single comments show for post
-res = RestClient.get 'http://localhost:3000/v1/posts/5/comments/9'
+# comments = JSON.parse(res)
 
 
+# # All comment fetch for post
+# res = RestClient.get 'http://localhost:3000/v1/posts/5/comments'
 
-# update comments
-response = RestClient.patch 'http://localhost:3000/v1/posts/5/comments/9' , {
- comment: {
-   content: "This comment make through irb console and updated"
- }}
+# # single comments show for post
+# res = RestClient.get 'http://localhost:3000/v1/posts/5/comments/9'
 
 
-#delete comments
-RestClient.delete "http://localhost:3000/v1/posts/5/comments/9"
+
+# # update comments
+# response = RestClient.patch 'http://localhost:3000/v1/posts/5/comments/9' , {
+#  comment: {
+#    content: "This comment make through irb console and updated"
+#  }}
+
+
+# #delete comments
+# RestClient.delete "http://localhost:3000/v1/posts/5/comments/9"
 
 
 
@@ -94,12 +94,17 @@ module RestClient
   url = "http://localhost:3000/v1/posts"
 
   def self.get(url ,headers= {})
-    Request.execute(method: :get :url => url)
+    Request.execute(method: :get, :url => url, :headers => headers, &block)
   end
 
   def self.post(url ,headers= {})
-    Request.execute(method: :post, url: url, :payload => payload)
+    Request.execute(method: :post, :url => url, :payload => payload)
   end
+end
+
+
+
+
 
 	# def self.get(url, headers= {} )
 	# 	Request.execute(method: :get, :url => "http://localhost:3000/v1/posts")
@@ -222,5 +227,3 @@ module RestClient
   # def self.before_execution_procs # :nodoc:
   #   @@before_execution_procs
   # end
-
-end

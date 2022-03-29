@@ -18,6 +18,10 @@ class V1::PostsController < ApplicationController
 
   end
 
+  def show_posts
+  	url = "http://localhost:3000/v1/posts"
+  	response = RestClient.get(url)
+  end
 
   def create
 		@post = Post.new(post_params)

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :v1, defaults:{format: :json} do
     # get 'comments/index'
-    # get 'posts/index'
+    get 'posts/show_posts'
     resources :posts do
       resources :comments
     end

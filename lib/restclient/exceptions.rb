@@ -1,3 +1,4 @@
+
 module RestClient
 
   # Hash of HTTP status code => message.
